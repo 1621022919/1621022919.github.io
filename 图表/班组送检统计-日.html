@@ -1,0 +1,134 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=bar-y-category-stack&code=PYBwLglsB2AEC8sDeAoWtJgDYFMBcq66YOAHmAMLBbABOeA5AO4AWEuDANGkSeY4FvnQCN-gQATAAxaB9v0CF0Vx4BfbsWDVIIPMh7FaEAOY6c9WAwCGpCAGdZRWKYsAFYBGglDha7AD0H2AFVzOGzNzDGAMbT0DEJUIEE1eAE8QfCNzFmMAE2AmBk9vBlSMrJzjYPScADNjAFcsMABuWABjYzhjLHNQgCMAhiwnHBy6FLTM7Li5eUVYXH1odPUkBR4dbXmNa1xysHUGAGYAUisicJZtowAWQ6n0TuAwMGAAWx2Do_RGmDBjJwAZY26sOowLQqjhJjx4gBBIILOJgRLJBgANzaoIY4PQpGhFlh1nhSR2zRIOjo8TesHSxi-6gA2gwAEKALmVAFBygFWbQAOilwjEzANByHK5DMZgBQbQAc_gKmYAns0ALvHixmALbtAAraAooLP5nCMKr5nPVDBVouVjOlBsVDAAuhjYP5tDhzLS4m5rNBjI8AugduJABAqgB4LcnEBFEHadYy0X1Nah0HYAYgAnABGCgUADsAFZQ-Yvo0ANZuowPL5YUNYf44LA5h1EVJZANhUFxdBLdywHCPEBpcw49aN2DlYCNKq2lIGCA29GNhvuSnU2A0xPq5PqgBs6tnsAAHIv1edOEvZwvzdZx-hy-gnS73WJALRyofxiKDIeuFYzmZ2ebaoY-NEMDEjyfOiYADBQC6FsWgKdo2lZMECIJgmOD7oM2rYlB2x5ED2fYDvkQ4jnWsCHkQk7GLSK7zrAS6wCu65kZu26cLu-5EPhqGnoigBU5uI14IoGwZpk-L53G-8Fhp-UYAGKQhQq7JquIEAriXaQdBtZwbhiFtihuHoOh_Y7Faw6WLh-HoIRtIAEzquZsCWdZFm2bsnCxpwuwMfWD7Mc6iLiIAsHLepxBJGHevHGFm_H5u-4ZfpGACiUULnFwFCUWcnge4ik1rB7hGU2LbqQOqFab2OmDtaBkqY2JnTo5Vnqv-6pVZZtWwLVjm1f-Ll4Q-PDmnIdRAA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  // title:{
+  //   textColor:'while',
+  //   text:'班组送检统计',
+  // },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      // Use axis to trigger tooltip
+      type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
+    }
+  },
+  legend: {},
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  yAxis: {
+    type: 'value'
+  },
+  xAxis: {
+    type: 'category',
+    data: ['建筑企业一', '建筑企业二', '建筑企业三', '建筑企业四', '建筑企业五', '建筑企业六', '建筑企业七', '建筑企业八', '建筑企业九', '建筑企业十']
+  },
+  series: [
+    {
+      name   : '实名认证度',
+      type   : 'bar',
+      color: '#91CC75',
+      barWidth: '30',
+      stack  : 'total',
+      label  : {
+      show   : true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [7, 5, 6, 7, 8, 6, 4,6,7,6]
+    },
+    {
+      name: '考勤落实度',
+      type: 'bar',
+      stack: 'total',
+      color: '#5470C6',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [7, 5, 6, 7, 8, 6, 4,6,7,6]
+    },
+    {
+      name: '欠薪预警',
+      type: 'bar',
+      stack: 'total',
+      color: '#FAC858',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [2, 2, 2, 2, 2, 2, 2,3,1,3]
+    },
+    {
+      name: '资格过期预警',
+      type: 'bar',
+      stack: 'total',
+      color: '#EE6666',
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [1, 2, 0, 1, 2, 0, 0,1,0,0]
+    },
+    
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

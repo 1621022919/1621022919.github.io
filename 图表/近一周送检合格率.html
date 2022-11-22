@@ -1,0 +1,103 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=bar-background&code=PYBwLglsB2AEC8sDeAoWsDmAnCATAXKuumKPgOQBMADCAB7kA0axARsGKQLYUDMtDZugC-Q2HQCCdCAGd8yFiQCeIAKbzyAYwCGYVRmBYlTRbG3SZAGQjR1RYuhkALYAHd8AM20AbGarEiAbC4utryANrkgFBygKs2gA6KTLDkgNBy8YnkgCg2gBz-6YBPZoAu8emAW3aACtrkALpBFta28vYOzm7yXr6qpqIsHehKUrJ1pmAq6kkAbj4ArqomDSDeEGA1dqYNLu4tfkGBpjZ6WGPe8gCs1JvmspbarKoHCg7oHoZcursaSPuTwgCk03eawN6GDQAYgAnCCfiJOmI_DhVHJYOFTPViH8AVgKEDeBIJABGABiAFEIcR5qouABlQbeYbIhzLYjQR4-foASDZ7LZ3ku11ZHI5jXcsDAWEmjFgAHpxYAAfUA9CqAPjNAFyeKD5HJAwBk8yg0A0pBAiUlgAp1KKATtNFcqVWy9HQwJSlNS6hLxYAHU0APAqAdgtAPD65otLNRgKSrC5mgA1iYfWzvRaHtAbRAAF7DHGHSN84Qp9lpi2iLp3EJgMIIkEnWAAdgAHGKcdRi0WxSDDpV6YM1BpWNosMT0G2sAB1PBgJx8aid2ACgBC2hD2GA42gBCFIv89LbU6wM7ntvttzu6D96KSWAwbYAFDiy8Wzxfz2LqAA6SgASnI9LTDlfsHKKGEAG4gA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  grid:{
+    top:'20px',
+    bottom:'30px',
+  },
+  xAxis: {
+    type: 'category',
+    axisLine:{
+      show:false,
+    },
+    data: ['11/1', '11/2', '11/3', '11/4', '11/5', '11/6', '11/7'],
+    xisLine: {
+      show: false
+    },
+  },
+  yAxis: {
+    type: 'value',
+    splitLine:{
+        show:false,
+      },
+    interval: 50,
+     axisLabel: {
+      formatter: '{value}%',
+      color: '#99',
+    }
+  },
+  series: [
+    {
+      color:'#3AA1FE',
+      itemStyle: {
+        
+        normal: {
+								label: {
+									show: true, //开启显示
+									position: 'top', //在上方显示
+									textStyle: { //数值样式
+										color: 'black',
+										
+										fontSize: 12
+									}
+								}
+							},},
+      data: [90, 78, 100, 90, 95,97,94],
+      type: 'bar',
+      barWidth:'15',
+      showBackground: true,
+      backgroundStyle: {
+        color: 'rgba(180, 180, 180, 0.2)'
+      }
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

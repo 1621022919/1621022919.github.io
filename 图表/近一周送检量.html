@@ -1,0 +1,149 @@
+<!--
+	此示例下载自 https://echarts.apache.org/examples/zh/editor.html?c=area-stack-gradient&code=PYBwLglsB2AEC8sDeAoWsDGwA2wBOAXLANoDkAxABwAMAYrQIICspANLBddQCLf1sdyAZgDsDAEz92Fel0oiBM2gCFaXUgF1WaWGGA5IIIqnToweCAHNLAU0IcAhgA8IAZzY70ztwAVgEaDA7Y09TMABPEBsiUgw8YFd3bVNTbAcAIxtsEJSU9IcMAGtLeIBXaAATAGEcfBjyADYHEQBOShZQ9ABfUJ7u5NhsG1tKnNMKhzAHIjJAQATAAYtACBVAHgtAQmtAB1NFBcBYORWNzR0ugb0cdOAnMfQAMxtJ0rxo5E7YVwcANxsGVwBJAFsHWzGPqmYFHHQlCAVS6DGxXMAxIQgJweFIWSwAC3hHAAjOIkSiwqACKRsUx8QN0GcwHpfgjyaEsIEHAEADIZLJEcylGyHAZOBguVwzUImXIRKIxDCTYb4cIEvLAcoTPDhADiDiMsCuDmwrhsFPGk2mJBJ2IA9NjFNjzeIreahHazQAWR0saTWs0NR0KDS9HRaHThAVuYUpUUpcWPUhvHXc-WmVwgbAQMAsgLRcO5Vzo4AAdwI2t1PNysGB3X9Az1FhsQpIIue0AcvyjCz2mwNZkiUeT0Bs8fQrimRRiABVgFNsP2Xr99GB0Zy8NyO4N0wBlCJDaEpXOQudEajPMEl7N51fhX5nbJanV65cOB4OdfhTdPEvoUAFFPhfcAOkoy_QLBcHsXtc1gGwMHRe8wFcH8Sg1dEIAwH8017e9VTwBwKggGxAgACmodhCNgYjsXYYhnjDSjcmAK4rj1LFCOolIgLqDg8EsdI8Nxf9YHEJgmHYbEGiYABKUhmNLADTEzN9YFo-ibCxMjJMA2p7FIDiuLI2BsRaHTxCEBpxMkstcg0UTD2XGxfhAKDXBDV83yuYAMFKWtSCrHD3Cs54JimGZsSdYjDPEITqAMhonXYFpiKEYL2H46hfRSI8ZIbJsW3mXY1nbZ5IxiHs-2XQcCkKUdxx1KdXBncd510Rd9WeIqnxfWTTB3Co9xI3zjxzXMzwvHAiELW9nnvW5Wsedr3xAT8Il_f9qNYkCbDAiCoLwGC4MwuykJQ9N0Mw7DcLAAiiIu3TyMkmaaLohj92klj1JiLS8P4wTdP0oiTLk_obtU-T7qUogVL-0wVtezj3vEaLYAaMLYBEYyJPBsyUgs3rchsuyHAc2tbpctyPK8mtUdyNKUn841iCC8L2E-hp6dgIQQqYFKQQGX0ugAbiAA
+	⚠ 请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.0/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  color: ['#80FFA5', '#00DDFF', '#37A2FF', '#FF0087', '#FFBF00'],
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        backgroundColor: '#6a7985'
+      }
+    }
+  },
+  legend: {
+    data: ['送检合格次数', '送检不合格次数']
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  grid: {
+    left: '3px',
+    right: '12px',
+    top:'15px',
+    bottom: '3px',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      boundaryGap: false,
+      data: ['11/1', '11/2', '11/3', '11/4', '11/5', '11/6', '11/7']
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value',
+      splitLine:{
+        show:false
+      }
+    }
+  ],
+  series: [
+    {
+      name: '迟到人次',
+      type: 'line',
+      stack: 'Total',
+      smooth: true,
+      lineStyle: {
+        width: 0
+      },
+      showSymbol: false,
+      areaStyle: {
+        opacity: 0.8,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgb(128, 255, 165)'
+          },
+          {
+            offset: 1,
+            color: 'rgb(1, 191, 236)'
+          }
+        ])
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [14, 22, 10, 24, 9, 3, 20]
+    },
+    {
+      name: '早退人次',
+      type: 'line',
+      stack: 'Total',
+      smooth: true,
+      lineStyle: {
+        width: 0
+      },
+      showSymbol: false,
+      areaStyle: {
+        opacity: 0.8,
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgb(255, 191, 0)'
+          },
+          {
+            offset: 1,
+            color: 'rgb(224, 62, 76)'
+          }
+        ])
+      },
+      emphasis: {
+        focus: 'series'
+      },
+      data: [14, 10, 5, 6, 10, 20, 20]
+    },
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
